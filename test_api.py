@@ -39,3 +39,19 @@ def test_search_cars(client):
     assert response.status_code == 200
     results = response.json()
     assert len(results) == 1280 + 68
+
+    response = client.post("/cars/search/", json={"selling_price_min": 100_000, "selling_price_max": 200_000})
+    assert response.status_code == 200
+    results = response.json()
+    assert len(results) == 353 + 406
+
+    response = client.post("/cars/search/", json={"selling_price_min": 100_000, "selling_price_max": 149_999})
+    assert response.status_code == 200
+    results = response.json()
+    assert len(results) == 353
+
+    response = client.post("/cars/search/", json={"selling_price_min": 150_000, "selling_price_max": 200_000})
+    assert response.status_code == 200
+    results = response.json()
+    assert len(results) == 406
+

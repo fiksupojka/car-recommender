@@ -41,12 +41,12 @@ def generate_query_model(model: SQLModel) -> BaseModel:
             fields[field_name] = (Optional[List[field_type]], None)
 
     # creates a model with respective attributes and types for Pydantic
-    return create_model('CarQuery2', **fields)
+    return create_model('CarQuery', **fields)
 
 def create_car_db_query(self):
     """Generates SQL Alchemy search query from data got in a body of the request.
 
-    The logic of the creation is prettu similar to the generate_query_model function,
+    The logic of the creation is pretty similar to the generate_query_model function,
     because both of them depend on Car model, which is the bearer of the truth."""
     type_hints = get_type_hints(Car)
     query = select(Car)
@@ -73,5 +73,5 @@ def create_car_db_query(self):
     return query
 
 # This is such an ugly code with respect to the beauty of the first idea
-CarQuery2 = generate_query_model(Car)
-CarQuery2.create_car_db_query = create_car_db_query
+CarQuery = generate_query_model(Car)
+CarQuery.create_car_db_query = create_car_db_query
