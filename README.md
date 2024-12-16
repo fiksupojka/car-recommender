@@ -45,6 +45,11 @@ The code in this repository is primarily for demonstration purposes and not inte
 
     ```bash
     uvicorn main:app --reload
+   
+2. In the virtual environment, load the data:
+
+   ```bash
+   python3 -m load_data
 
 ### Running Tests
 
